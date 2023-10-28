@@ -6,7 +6,7 @@ function Header() {
   return (
     <nav className="bg-gray-800 p-4">
       <div className="container mx-auto flex justify-between items-center">
-        <div className="text-white text-2xl font-bold">Logo</div>
+        <div className="text-white text-2xl font-bold">Country Finder</div>
 
         {/* Hamburger Menu */}
         <div className="block md:hidden">
@@ -41,9 +41,6 @@ function Header() {
           </a>
           <a href="#" className="text-white text-sm mx-2 hover:underline">
             Services
-          </a>
-          <a href="#" className="text-white text-sm mx-2 hover:underline">
-            Contact
           </a>
         </div>
       </div>
