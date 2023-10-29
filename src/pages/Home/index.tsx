@@ -4,6 +4,7 @@ import SearchBox from "../../components/Search/SearchBox";
 import SearchResultList from "../../components/Search/SearchResultList";
 import useDebounce from "../../hooks/useDebounce";
 import { countryListDetail } from "../../types/mian";
+import CountryCard from "../../components/CountryCard";
 
 function Home() {
   const [searchText, setSearchText] = useState("");
@@ -37,7 +38,7 @@ function Home() {
   return (
     <section className="home-section">
       <div className="bg-gray-100 p-4">
-        <div className="container mx-auto">
+        <div className="container mx-auto h-[800px]">
           <div className="grid">
             <SearchBox onChange={searchTerm} value={debouncedSearchValue} />
             {listResult.length > 0 ? (
@@ -51,6 +52,8 @@ function Home() {
                 ))}
               </div>
             ) : null}
+
+            <CountryCard />
           </div>
         </div>
       </div>

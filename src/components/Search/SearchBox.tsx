@@ -17,7 +17,7 @@ function SearchBox({ searchValue, onChange }: any) {
         value={searchValue}
         onChange={onChange}
         className="w-full md:w-auto flex-1 p-2 border border-gray-300 rounded-md mb-2 md:mb-0 md:mr-2"
-        placeholder="Search..."
+        placeholder="Search country name..."
       />
 
       <button
