@@ -1,17 +1,13 @@
 import React, { createContext, useState, ReactNode } from "react";
-
-interface Country {
-  cca3: string;
-  name: { common: string };
-  capital: string[];
-  // Add other fields as needed
-}
+import { countryListDetail } from "../types/mian";
 
 interface CountryContextProps {
-  countries: Country[];
-  setCountries: React.Dispatch<React.SetStateAction<Country[]>>;
-  selectedCountry: Country | null;
-  setSelectedCountry: React.Dispatch<React.SetStateAction<Country | null>>;
+  countries: countryListDetail[];
+  setCountries: React.Dispatch<React.SetStateAction<countryListDetail[]>>;
+  selectedCountry: countryListDetail | null;
+  setSelectedCountry: React.Dispatch<
+    React.SetStateAction<countryListDetail | null>
+  >;
 }
 
 interface CountryProviderProps {
@@ -25,8 +21,9 @@ export const CountryContext = createContext<CountryContextProps | undefined>(
 export const CountryProvider: React.FC<CountryProviderProps> = ({
   children,
 }) => {
-  const [countries, setCountries] = useState<Country[]>([]);
-  const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
+  const [countries, setCountries] = useState<countryListDetail[]>([]);
+  const [selectedCountry, setSelectedCountry] =
+    useState<countryListDetail | null>(null);
 
   return (
     <CountryContext.Provider
