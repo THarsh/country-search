@@ -1,10 +1,9 @@
 import React, { useContext } from "react";
 import { CountryContext } from "../../context";
+import ErrorBox from "../ErrorBox";
 
 function SearchResultList() {
-  const { countries, setSelectedCountry } = useContext(CountryContext)!;
-
-  console.log("xxx---->", countries);
+  const { error, countries, setSelectedCountry } = useContext(CountryContext)!;
 
   return (
     <div>
@@ -24,6 +23,7 @@ function SearchResultList() {
           ))}
         </div>
       ) : null}
+      {error! ? <ErrorBox /> : null}
     </div>
   );
 }

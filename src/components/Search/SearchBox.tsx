@@ -1,22 +1,20 @@
 import React, { useEffect, useState, useCallback, useContext } from "react";
 import useDebounce from "../../hooks/useDebounce";
 import Source from "../../api/source";
-import { countryListDetail } from "../../types/mian";
 import { CountryContext } from "../../context";
 
 function SearchBox() {
   const [searchText, setSearchText] = useState<string>("");
   const debouncedSearchValue = useDebounce(searchText, 500);
-  const [listResult, setListResult] = useState<countryListDetail[]>([]);
-  const { setCountries, setSelectedCountry } = useContext(CountryContext)!;
+  const { setCountries, setSelectedCountry, setError } =
+    useContext(CountryContext)!;
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    console.log("Search Query: ");
-    // add your search handling logic here
+    handleSearch();
   };
 
-  const fireOnBySearch = useCallback(async () => {
+  const handleSearch = useCallback(async () => {
     try {
       if (debouncedSearchValue) {
         let result = await Source.get(`name/${debouncedSearchValue}`);
@@ -26,23 +24,28 @@ function SearchBox() {
       } else {
         setCountries([]);
         setSelectedCountry(null);
+        setError(null);
       }
-    } catch (error) {
-      console.error("Error fetching countries:", error);
-      console.error(error);
+    } catch (error: any) {
+      if (error.response.data.status === 404) {
+        setError(
+          "Country Not Found: Please check the country name and try again."
+        );
+      }
       setCountries([]);
     }
-  }, [debouncedSearchValue]);
+  }, [debouncedSearchValue, setCountries, setSelectedCountry, setError]);
 
   const searchClear = () => {
     setCountries([]);
     setSelectedCountry(null);
     setSearchText("");
+    setError(null);
   };
 
   useEffect(() => {
-    fireOnBySearch();
-  }, [fireOnBySearch, setCountries, setSelectedCountry]);
+    handleSearch();
+  }, [handleSearch, setCountries, setSelectedCountry]);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -60,9 +63,9 @@ function SearchBox() {
           >
             <path
               stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
               d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
             />
           </svg>
@@ -76,20 +79,14 @@ function SearchBox() {
           placeholder=" Search country name.."
           required
         />
-        <button
-          type="submit"
-          className="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        >
-          Search
-        </button>
 
         {searchText && (
           <button
-            className="absolute top-0 right-0 bottom-0 pr-28"
+            className="absolute top-0 right-0 bottom-0 pr-4"
             onClick={searchClear}
           >
             <svg
-              className="text-slate-100 h-4 w-4 fill-current"
+              className="text-slate-200 hover:text-slate-400 h-4 w-4 fill-current"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 47.971 47.971"
             >

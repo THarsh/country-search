@@ -8,6 +8,8 @@ interface CountryContextProps {
   setSelectedCountry: React.Dispatch<
     React.SetStateAction<countryListDetail | null>
   >;
+  error: string | null;
+  setError: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
 interface CountryProviderProps {
@@ -24,10 +26,18 @@ export const CountryProvider: React.FC<CountryProviderProps> = ({
   const [countries, setCountries] = useState<countryListDetail[]>([]);
   const [selectedCountry, setSelectedCountry] =
     useState<countryListDetail | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   return (
     <CountryContext.Provider
-      value={{ countries, setCountries, selectedCountry, setSelectedCountry }}
+      value={{
+        countries,
+        setCountries,
+        selectedCountry,
+        setSelectedCountry,
+        error,
+        setError,
+      }}
     >
       {children}
     </CountryContext.Provider>
