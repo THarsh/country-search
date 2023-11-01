@@ -6,7 +6,7 @@ function ContentBox() {
           Country Finder APP
         </span>
       </h1>
-      <p className="text-lg font-normal text-gray-500 lg:text-md dark:text-gray-400">
+      <p className="text-lg font-normal text-gray-500 lg:text-md dark:text-gray-900">
         This page allows you to search for countries and view detailed
         information about them.
       </p>

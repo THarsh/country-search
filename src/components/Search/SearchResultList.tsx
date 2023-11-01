@@ -3,16 +3,28 @@ import { CountryContext } from "../../context";
 import ErrorBox from "../ErrorBox";
 
 function SearchResultList() {
-  const { error, countries, setSelectedCountry } = useContext(CountryContext)!;
-
+  const { error, countries, setSelectedCountry, setCountries } =
+    useContext(CountryContext)!;
+  const clearResult = () => {
+    setCountries([]);
+  };
   return (
     <>
       {countries.length > 0 ? (
-        <div className="grid  bg-slate-50 mt-5 rounded-lg shadow-md p-6 transition ease-in-out ">
+        <div className="grid  bg-slate-50 mt-5 rounded-lg shadow-md  transition ease-in-out ">
+          <div className="px-4 pt-4 pb-4 flex justify-between">
+            <p className=" text-sm font-medium">Search Result</p>
+            <p
+              onClick={clearResult}
+              className="text-sm font-extralight cursor-pointer text-slate-400 hover:text-slate-900 "
+            >
+              Clear Result
+            </p>
+          </div>
           <div className="overflow-auto max-h-60">
             {countries.map((country, index) => (
               <div key={index} onClick={() => setSelectedCountry(country)}>
-                <div className="group flex items-center rounded-md cursor-pointer transition ease-in-out p-2 mt-1">
+                <div className="group flex items-center rounded-md cursor-pointer transition ease-in-out px-8 pb-4 mt-1">
                   <img
                     src={country.flags.svg}
                     alt="flag"

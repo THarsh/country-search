@@ -6,7 +6,7 @@ import ContentBox from "../../components/ContentBox";
 
 function Home() {
   return (
-    <section className="home-section min-h-full">
+    <section className="home-section">
       <div className="py-20 px-4 flex justify-center">
         <div className="container mx-auto ">
           <div className="grid md:grid-cols-12 md:gap-4 ">
