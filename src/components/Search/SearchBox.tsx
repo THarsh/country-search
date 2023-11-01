@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback, useContext } from "react";
 import useDebounce from "../../hooks/useDebounce";
-import Source from "../../api/source";
+import { fetchCountries } from "../../api/countryApi";
 import { CountryContext } from "../../context";
 
 function SearchBox() {
@@ -15,25 +15,19 @@ function SearchBox() {
   };
 
   const handleSearch = useCallback(async () => {
-    try {
-      if (debouncedSearchValue) {
-        let result = await Source.get(`name/${debouncedSearchValue}`);
-        if (result?.status === 200) {
-          setCountries(result?.data);
-          setError(null);
-        }
-      } else {
+    if (debouncedSearchValue) {
+      const result = await fetchCountries(debouncedSearchValue);
+      if (result.error) {
+        setError(result.error);
         setCountries([]);
-        setSelectedCountry(null);
+      } else {
+        setCountries(result.data);
         setError(null);
       }
-    } catch (error: any) {
-      if (error.response.data.status === 404) {
-        setError(
-          "Country Not Found: Please check the country name and try again."
-        );
-      }
+    } else {
       setCountries([]);
+      setSelectedCountry(null);
+      setError(null);
     }
   }, [debouncedSearchValue, setCountries, setSelectedCountry, setError]);
 
