@@ -8,7 +8,7 @@ function SearchBox() {
   const debouncedSearchValue = useDebounce(searchText, 500);
   const { setCountries, setSelectedCountry, setError } =
     useContext(CountryContext)!;
-  const { handleSearch } = useSearch();
+  const { handleSearch, loading } = useSearch();
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -58,7 +58,6 @@ function SearchBox() {
           placeholder=" Search country name.."
           required
         />
-
         {searchText && (
           <button
             className="absolute top-0 right-0 bottom-0 pr-4"

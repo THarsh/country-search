@@ -1,9 +1,10 @@
-import React, { createContext, useContext, useCallback } from "react";
+import React, { createContext, useContext, useCallback, useState } from "react";
 import { fetchCountries } from "../api/countryApi";
 import { CountryContext } from "./countryContext";
 
 interface SearchContextProps {
   handleSearch: (debouncedSearchValue: string) => void;
+  loading: boolean;
 }
 
 interface SearchProviderProps {
@@ -23,11 +24,14 @@ export const useSearch = () => {
 export const SearchProvider: React.FC<SearchProviderProps> = ({ children }) => {
   const { setCountries, setSelectedCountry, setError } =
     useContext(CountryContext)!;
+  const [loading, setLoading] = useState(false);
 
   const handleSearch = useCallback(
     async (debouncedSearchValue: string) => {
+      setLoading(true);
       if (debouncedSearchValue) {
         const result = await fetchCountries(debouncedSearchValue);
+        setLoading(false);
         if (result.error) {
           setError(result.error);
           setCountries([]);
@@ -37,6 +41,7 @@ export const SearchProvider: React.FC<SearchProviderProps> = ({ children }) => {
           setError(null);
         }
       } else {
+        setLoading(false);
         setCountries([]);
         setSelectedCountry(null);
         setError(null);
@@ -46,7 +51,7 @@ export const SearchProvider: React.FC<SearchProviderProps> = ({ children }) => {
   );
 
   return (
-    <SearchContext.Provider value={{ handleSearch }}>
+    <SearchContext.Provider value={{ handleSearch, loading }}>
       {children}
     </SearchContext.Provider>
   );

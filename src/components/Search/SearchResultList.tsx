@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { CountryContext } from "../../context/countryContext";
 import ErrorBox from "../ErrorBox";
+import Spinner from "../Spinner";
 
 function SearchResultList() {
   const { error, countries, setSelectedCountry, setCountries } =
@@ -40,6 +41,7 @@ function SearchResultList() {
         </div>
       ) : null}
       {error! ? <ErrorBox /> : null}
+      <Spinner />
     </>
   );
 }
