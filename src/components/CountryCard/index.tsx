@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { CountryContext } from "../../context";
+import { CountryContext } from "../../context/countryContext";
 
 function CountryCard() {
   const { selectedCountry } = useContext(CountryContext)!;

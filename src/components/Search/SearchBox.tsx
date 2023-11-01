@@ -1,35 +1,19 @@
-import React, { useEffect, useState, useCallback, useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import useDebounce from "../../hooks/useDebounce";
-import { fetchCountries } from "../../api/countryApi";
-import { CountryContext } from "../../context";
+import { CountryContext } from "../../context/countryContext";
+import { useSearch } from "../../context/searchContext";
 
 function SearchBox() {
   const [searchText, setSearchText] = useState<string>("");
   const debouncedSearchValue = useDebounce(searchText, 500);
   const { setCountries, setSelectedCountry, setError } =
     useContext(CountryContext)!;
+  const { handleSearch } = useSearch();
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    handleSearch();
+    handleSearch(debouncedSearchValue);
   };
-
-  const handleSearch = useCallback(async () => {
-    if (debouncedSearchValue) {
-      const result = await fetchCountries(debouncedSearchValue);
-      if (result.error) {
-        setError(result.error);
-        setCountries([]);
-      } else {
-        setCountries(result.data);
-        setError(null);
-      }
-    } else {
-      setCountries([]);
-      setSelectedCountry(null);
-      setError(null);
-    }
-  }, [debouncedSearchValue, setCountries, setSelectedCountry, setError]);
 
   const searchClear = () => {
     setCountries([]);
@@ -39,8 +23,8 @@ function SearchBox() {
   };
 
   useEffect(() => {
-    handleSearch();
-  }, [handleSearch, setCountries, setSelectedCountry]);
+    handleSearch(debouncedSearchValue);
+  }, [debouncedSearchValue, handleSearch]);
 
   return (
     <form onSubmit={handleSubmit}>

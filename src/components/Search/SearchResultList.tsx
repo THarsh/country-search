@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { CountryContext } from "../../context";
+import { CountryContext } from "../../context/countryContext";
 import ErrorBox from "../ErrorBox";
 
 function SearchResultList() {
