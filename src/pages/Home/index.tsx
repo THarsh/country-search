@@ -1,18 +1,17 @@
-import React, { useCallback, useEffect, useState } from "react";
-import Source from "../../api/source";
+import React from "react";
 import SearchBox from "../../components/Search/SearchBox";
 import SearchResultList from "../../components/Search/SearchResultList";
-import useDebounce from "../../hooks/useDebounce";
-import { countryListDetail } from "../../types/mian";
 import CountryCard from "../../components/CountryCard";
+import ContentBox from "../../components/ContentBox";
 
 function Home() {
   return (
-    <section className="home-section ">
-      <div className="bg-gray-100 p-4 flex justify-center h-screen">
+    <section className="home-section min-h-full">
+      <div className="py-20 px-4 flex justify-center">
         <div className="container mx-auto ">
-          <div className="grid grid-cols-12 gap-4">
-            <div className="col-start-3 col-span-8 pt-10">
+          <div className="grid md:grid-cols-12 md:gap-4 ">
+            <div className=" md:col-start-3 col-span-8 pt-10 text-left">
+              <ContentBox />
               <SearchBox />
               <SearchResultList />
               <CountryCard />

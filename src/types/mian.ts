@@ -15,4 +15,6 @@ export type countryListDetail = {
   car: {
     side: string;
   };
+  continents: string;
+  timezones: string;
 };

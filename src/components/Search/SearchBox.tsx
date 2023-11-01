@@ -20,6 +20,7 @@ function SearchBox() {
         let result = await Source.get(`name/${debouncedSearchValue}`);
         if (result?.status === 200) {
           setCountries(result?.data);
+          setError(null);
         }
       } else {
         setCountries([]);
@@ -53,7 +54,7 @@ function SearchBox() {
         Search country name..
       </label>
       <div className="relative">
-        <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+        <div className="absolute inset-y-0 left-0 flex items-center pl-6 pointer-events-none">
           <svg
             className="w-4 h-4 text-gray-500 dark:text-gray-400"
             aria-hidden="true"
@@ -73,9 +74,9 @@ function SearchBox() {
         <input
           onChange={(e) => setSearchText(e.target.value)}
           value={searchText}
-          type="search"
+          type="text"
           id="search"
-          className="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="block w-full px-10  py-6 pl-14 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder=" Search country name.."
           required
         />
