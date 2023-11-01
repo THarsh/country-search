@@ -34,13 +34,19 @@ function CountryCard() {
               <h6 className="font-normal text-gray-700 mb-2">
                 {selectedCountry.name.official}
               </h6>
-              {Object.values(selectedCountry.currencies).map(
-                (currency, index) => (
-                  <p className="mb-2" key={index}>
-                    <strong>Currency : </strong>
-                    {currency.name} - ({currency.symbol})
-                  </p>
+              {selectedCountry.currencies! ? (
+                Object.values(selectedCountry.currencies).map(
+                  (currency, index) => (
+                    <p className="mb-2" key={index}>
+                      <strong>Currency : </strong>
+                      {currency.name} - ({currency.symbol})
+                    </p>
+                  )
                 )
+              ) : (
+                <p className="mb-2">
+                  <strong>Currency : </strong> - -
+                </p>
               )}
               <p className="mb-2">
                 <strong>Drive side on road</strong> : {selectedCountry.car.side}
