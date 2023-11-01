@@ -8,12 +8,7 @@ function SearchBox() {
   const debouncedSearchValue = useDebounce(searchText, 500);
   const { setCountries, setSelectedCountry, setError } =
     useContext(CountryContext)!;
-  const { handleSearch, loading } = useSearch();
-
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-    handleSearch(debouncedSearchValue);
-  };
+  const { handleSearch } = useSearch();
 
   const searchClear = () => {
     setCountries([]);
@@ -22,12 +17,18 @@ function SearchBox() {
     setError(null);
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleSearch(debouncedSearchValue);
+    }
+  };
+
   useEffect(() => {
     handleSearch(debouncedSearchValue);
   }, [debouncedSearchValue, handleSearch]);
 
   return (
-    <form onSubmit={handleSubmit}>
+    <>
       <label className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">
         Search country name..
       </label>
@@ -52,8 +53,8 @@ function SearchBox() {
         <input
           onChange={(e) => setSearchText(e.target.value)}
           value={searchText}
+          onKeyDown={handleKeyDown}
           type="text"
-          id="search"
           className="block w-full px-10  py-6 pl-14 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder=" Search country name.."
           required
@@ -73,7 +74,7 @@ function SearchBox() {
           </button>
         )}
       </div>
-    </form>
+    </>
   );
 }
 
