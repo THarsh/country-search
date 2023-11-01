@@ -1,7 +1,7 @@
 import React from "react";
 import SearchBox from "../../components/Search/SearchBox";
 import SearchResultList from "../../components/Search/SearchResultList";
-import CountryCard from "../../components/CountryCard";
+import CountryCard from "../../components/CountryDetailCard";
 import ContentBox from "../../components/ContentBox";
 
 function Home() {

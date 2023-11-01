@@ -22,7 +22,7 @@ function SearchResultList() {
               Clear Result
             </p>
           </div>
-          <div className="overflow-auto max-h-60">
+          <div className="overflow-auto max-h-40">
             {countries.map((country, index) => (
               <div key={index} onClick={() => setSelectedCountry(country)}>
                 <div className="group flex items-center rounded-md cursor-pointer transition ease-in-out px-8 pb-4 mt-1">
