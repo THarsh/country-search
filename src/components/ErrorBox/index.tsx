@@ -6,7 +6,7 @@ function ErrorBox() {
   return (
     <>
       <div
-        className="relative flex items-center p-4 text-sm text-gray-800 border border-gray-300 rounded-lg dark:border-gray-600 mt-8"
+        className="relative flex items-center p-4 pr-10 text-sm text-gray-800 border border-gray-300 rounded-lg dark:border-gray-600 mt-8"
         role="alert"
       >
         <svg
