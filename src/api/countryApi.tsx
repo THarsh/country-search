@@ -1,4 +1,3 @@
-// countryAPI.ts
 import axios from "axios";
 interface FetchResponse {
   data: any | null;
