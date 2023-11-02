@@ -1,5 +1,5 @@
 import React, { createContext, useState, ReactNode } from "react";
-import { countryListDetail } from "../types/mian";
+import { countryListDetail } from "../types/main";
 
 interface CountryContextProps {
   countries: countryListDetail[];

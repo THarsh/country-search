@@ -20,7 +20,7 @@ function ErrorBox() {
         </svg>
         <span className="sr-only">Info</span>
         <div>
-          <span className="font-medium">{error}</span>
+          <span className="font-medium">Invalid Country Name : {error}</span>
         </div>
         <button
           className="absolute top-0 right-0 bottom-0 pr-4"
