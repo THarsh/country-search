@@ -3,6 +3,10 @@
 Country Search is a React application that allows users to search for countries and view details about them.
 The application is built using TypeScript and utilizes TailwindCSS for styling.
 
+## :rocket: Live Demo
+
+Experience the application by accessing the live demo [here](https://6n7p6m-3000.csb.app/).
+
 ## Features
 
 - Search for countries by name.
